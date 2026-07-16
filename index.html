@@ -469,6 +469,7 @@ function goRes(id){
   const r = D.residences.find(x => x.residence_id === id);
   if(!r || !r.lat) return;
   if(isMobile()){ const p = $("#panel"); p.classList.remove("full"); p.classList.add("open"); }
+  map.setOptions({maxZoom: null});  /* fit()이 걸어둔 임시 maxZoom 해제 */
   map.panTo({lat: +r.lat, lng: +r.lng});
   if(map.getZoom() < 16) map.setZoom(16);
   const n = resNodes[id];
