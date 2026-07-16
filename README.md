@@ -1,10 +1,10 @@
 # 어학연수 학교·기숙사 지도 (몰타·영국·아일랜드)
 
-종로유학원 상담용 어학연수 학교 안내 지도. Leaflet(오픈스트리트맵) 기반 단일 HTML 사이트로,
+종로유학원 상담용 어학연수 학교 안내 지도. **구글맵(Maps JavaScript API)** 기반 단일 HTML 사이트로,
 8개 브랜드(Kaplan, EF, St Giles, Kings, LSI, Bayswater, EC, English Path)의 센터와 기숙사 위치를 보여줍니다.
 
 - **배포:** GitHub Pages → https://jaebong-choi.github.io/esl-map-MTUKIR/
-- **진입점:** `index.html` (라이브러리·로고 내장, 외부 의존은 지도 타일뿐)
+- **진입점:** `index.html` (로고 내장, 지도는 Google Maps JS API — 한글 지명 `language=ko`)
 - **데이터 규모:** 도시 16 · 브랜드 8 · 센터 50 · 기숙사 132 (마스터시트 v3.10 기준)
 
 ## 파일 구성
@@ -28,5 +28,8 @@
 
 ## 보안 주의
 
-`geocode_v3.py`의 `API_KEY`는 자리표시자입니다. **실제 구글 API 키를 이 공개 리포에 커밋하지 마세요.**
-로컬에서 실행할 때만 키를 넣고, 커밋 전 자리표시자로 되돌리거나 키에 HTTP 리퍼러/API 제한을 걸어 두세요.
+- **지도용 키** (`index.html`의 구글맵 로더): `https://jaebong-choi.github.io/*` 도메인 + Maps JavaScript API로 제한되어 있어
+  공개 리포에 있어도 안전합니다. 도메인이 바뀌면 구글 클라우드 콘솔에서 제한 목록을 갱신하세요.
+- **지오코딩용 키** (`geocode_v3.py`의 `API_KEY`): 자리표시자입니다. 웹사이트 제한이 걸린 지도용 키는
+  파이썬 스크립트에서 작동하지 않으므로, 좌표 변환 시에는 **별도의 서버용(제한 없는/IP 제한) 키**를 로컬에서만 넣어 쓰고
+  커밋 전 자리표시자로 되돌리세요.
