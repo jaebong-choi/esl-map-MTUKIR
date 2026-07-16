@@ -245,7 +245,10 @@ function initMap(){
     mapTypeControl: false, fullscreenControl: false, streetViewControl: false,
     clickableIcons: false, gestureHandling: "greedy"
   });
-  goCountry();
+  /* 패널은 즉시 그리고, 지도 렌더(fitBounds 포함)는 지도가 크기·투영을
+     갖춘 뒤에 실행 — 준비 전에 fitBounds를 부르면 zoom 0으로 붕괴해 흰 화면이 됨 */
+  paint(); sheet(false);
+  google.maps.event.addListenerOnce(map, "idle", goCountry);
 }
 function clearMk(){ mk.forEach(m => m.map = null); mk = []; _stack = {}; }
 function el(html){ const d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstChild; }
@@ -304,6 +307,10 @@ function render(){
 }
 function fit(items, max){
   if(!items.length) return;
+  /* 지도 준비 전(크기·투영 미확정) 호출은 준비 후로 미룸 */
+  if(!map.getProjection() || !map.getDiv().offsetWidth){
+    google.maps.event.addListenerOnce(map, "idle", () => fit(items, max)); return;
+  }
   if(items.length === 1){ map.setCenter({lat: items[0].lat, lng: items[0].lng}); map.setZoom(max); return; }
   const b = new google.maps.LatLngBounds();
   items.forEach(i => b.extend({lat: i.lat, lng: i.lng}));
