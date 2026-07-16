@@ -6,7 +6,7 @@
 <title>몰타·영국·아일랜드 어학연수 학교 지도 | 종로유학원</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -158,26 +158,40 @@ header{position:fixed;top:0;left:0;right:0;height:58px;z-index:40;background:var
 .empty{padding:40px 20px;text-align:center;color:var(--mute);font-size:12.5px;line-height:1.7}
 
 /* ---------- 인트로 (국가 선택) ---------- */
-#intro{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;overflow-y:auto}
-#intro.show{display:block}
-.intro-in{max-width:440px;margin:0 auto;padding:10vh 20px 40px}
-.intro-brand{display:inline-flex;align-items:center;background:var(--navy);
-  border-radius:11px;padding:9px 14px;margin-bottom:36px}
-.intro-brand img{height:26px;display:block}
-.intro-in h1{margin:0 0 8px;font-size:24px;font-weight:900;letter-spacing:-.5px;color:var(--ink)}
-.intro-in>p{margin:0 0 26px;font-size:13.5px;line-height:1.7;color:var(--body)}
-.cc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  padding:18px 20px;cursor:pointer;display:flex;align-items:center;gap:14px;
-  transition:border-color .15s,transform .15s,box-shadow .15s}
-.cc+.cc{margin-top:10px}
-.cc:hover{border-color:var(--navy);transform:translateY(-1px);box-shadow:var(--sh)}
-.cc:active{transform:scale(.99)}
-.cc-main{flex:1;min-width:0}
-.cc-name{font-size:17px;font-weight:900;letter-spacing:-.3px;color:var(--ink)}
-.cc-name span{font-size:12px;font-weight:500;color:var(--mute);margin-left:7px}
-.cc-desc{font-size:12.5px;color:var(--body);margin-top:4px;line-height:1.6}
-.cc-stat{font-size:11px;color:var(--mute);margin-top:7px;font-weight:500}
-.cc .chev{font-size:18px}
+#intro{position:fixed;inset:0;z-index:60;background:#0B1E33;display:none;overflow-y:auto}
+#intro.show{display:flex;flex-direction:column}
+.intro-top{flex-shrink:0;padding:22px 28px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.intro-brand{display:inline-flex;align-items:center;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:8px 13px;flex-shrink:0}
+.intro-brand img{height:24px;display:block}
+.intro-top p{margin:0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.62);max-width:520px}
+.intro-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);min-height:0}
+@media(max-width:860px){.intro-grid{grid-template-columns:1fr;overflow-y:auto}}
+.cc{position:relative;overflow:hidden;cursor:pointer;background:#132A44 center/cover no-repeat;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:26px 22px;
+  min-height:0;border-left:1px solid rgba(255,255,255,.08)}
+@media(max-width:860px){.cc{min-height:34vh;border-left:0;border-top:1px solid rgba(255,255,255,.08)}}
+.cc:first-child{border-left:0}
+.cc::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,30,51,0) 38%,rgba(11,30,51,.55) 68%,rgba(11,30,51,.92) 100%);
+  transition:opacity .25s}
+.cc-img{position:absolute;inset:0;background-size:cover;background-position:center;
+  transform:scale(1.02);transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.cc:hover .cc-img{transform:scale(1.08)}
+.cc:hover::before{opacity:.85}
+.cc-main{position:relative;z-index:1}
+.cc-name{font-family:'Noto Serif KR',serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.cc-name span{display:block;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:700;
+  color:rgba(255,255,255,.66);letter-spacing:.16em;text-transform:uppercase;margin-top:5px}
+.cc-desc{font-size:12.5px;color:rgba(255,255,255,.78);margin-top:10px;line-height:1.6}
+.cc-stat{font-size:11.5px;color:rgba(255,255,255,.56);margin-top:12px;font-weight:500}
+.cc-go{position:relative;z-index:1;display:flex;align-items:center;gap:5px;margin-top:16px;
+  font-size:12px;font-weight:700;color:#FFDE59;opacity:0;transform:translateY(4px);
+  transition:opacity .2s,transform .2s}
+.cc:hover .cc-go{opacity:1;transform:translateY(0)}
+.cc-credit{position:absolute;right:10px;bottom:8px;z-index:1;font-size:9.5px;
+  color:rgba(255,255,255,.32);letter-spacing:.02em}
+@media(prefers-reduced-motion:reduce){.cc-img,.cc-go{transition:none}}
 .legend{position:fixed;right:12px;bottom:12px;z-index:20;background:rgba(255,255,255,.96);
   border:1px solid var(--line);border-radius:11px;padding:9px 11px;box-shadow:var(--sh);
   font-size:11px;color:var(--body);display:flex;flex-direction:column;gap:6px}
@@ -219,30 +233,40 @@ header{position:fixed;top:0;left:0;right:0;height:58px;z-index:40;background:var
 </div>
 
 <div id="intro" class="show">
-  <div class="intro-in">
+  <div class="intro-top">
     <div class="intro-brand"><img id="intro-logo" alt="종로유학원"></div>
-    <h1>어학연수 학교 지도</h1>
     <p>국가를 선택하면 그 나라의 어학원 센터와 기숙사 위치를 지도에서 확인할 수 있습니다.</p>
+  </div>
+  <div class="intro-grid">
     <div class="cc" id="cc-uk" onclick="selectCountry('uk')">
+      <div class="cc-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Big_Ben_Elizabeth_Tower_London_2023_01.jpg/1200px-Big_Ben_Elizabeth_Tower_London_2023_01.jpg')"></div>
       <div class="cc-main">
         <div class="cc-name">영국<span>United Kingdom</span></div>
         <div class="cc-desc">런던, 브라이튼, 옥스포드, 에딘버러 등</div>
         <div class="cc-stat"></div>
-      </div><div class="chev">›</div>
+        <div class="cc-go">센터 살펴보기 <span aria-hidden="true">→</span></div>
+      </div>
+      <div class="cc-credit">사진: Julian Herzog, CC BY 4.0</div>
     </div>
     <div class="cc" id="cc-ie" onclick="selectCountry('ie')">
+      <div class="cc-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Custom_House_Quay%2C_Dublin_%28DSC06368%29.jpg/1200px-Custom_House_Quay%2C_Dublin_%28DSC06368%29.jpg')"></div>
       <div class="cc-main">
         <div class="cc-name">아일랜드<span>Ireland</span></div>
         <div class="cc-desc">더블린</div>
         <div class="cc-stat"></div>
-      </div><div class="chev">›</div>
+        <div class="cc-go">센터 살펴보기 <span aria-hidden="true">→</span></div>
+      </div>
+      <div class="cc-credit">사진: Matti Blume, CC BY-SA 4.0</div>
     </div>
     <div class="cc" id="cc-mt" onclick="selectCountry('mt')">
+      <div class="cc-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Valletta%2C_Malta_%28Aerial_View%29.jpg/1200px-Valletta%2C_Malta_%28Aerial_View%29.jpg')"></div>
       <div class="cc-main">
         <div class="cc-name">몰타<span>Malta</span></div>
         <div class="cc-desc">세인트줄리언스</div>
         <div class="cc-stat"></div>
-      </div><div class="chev">›</div>
+        <div class="cc-go">센터 살펴보기 <span aria-hidden="true">→</span></div>
+      </div>
+      <div class="cc-credit">사진: Jonathan Mercieca, CC BY-SA 4.0</div>
     </div>
   </div>
 </div>
