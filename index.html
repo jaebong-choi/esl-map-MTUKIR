@@ -702,6 +702,8 @@ header{position:fixed;top:0;left:0;right:0;height:58px;z-index:40;background:var
 /* ---------- 지도 ---------- */
 #map{position:fixed;inset:58px 0 0 0}
 @media(min-width:861px){#map{left:392px}}
+/* 타일 사이 회색 이음선(seam) 제거 — 타일을 0.5px 겹치게 */
+.leaflet-container .leaflet-tile{width:256.5px !important;height:256.5px !important}
 
 /* ---------- 핀 ---------- */
 .pin{transform:translate(-50%,-100%);cursor:pointer;will-change:transform}
@@ -902,8 +904,9 @@ function initMap(){
   map = L.map("map", {zoomControl: !isMobile(), attributionControl: false});
   L.control.attribution({position: "bottomleft", prefix: false}).addTo(map);
   map.setView([53.4, -2.4], 6);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {maxZoom: 19, attribution: "&copy; OpenStreetMap contributors"}).addTo(map);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    {maxZoom: 20, detectRetina: true, subdomains: "abcd",
+     attribution: "&copy; OpenStreetMap &copy; CARTO"}).addTo(map);
   goCountry();
 }
 function clearMk(){ mk.forEach(m => m.remove()); mk = []; _stack = {}; }
