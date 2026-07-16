@@ -259,7 +259,7 @@ function add(lat,lng,node,z){
     map, position: {lat, lng}, content: node,
     zIndex: (z||0)*100, gmpClickable: !!h
   });
-  if(h) m.addListener("click", h);
+  if(h) m.addEventListener("gmp-click", h);
   mk.push(m); return m;
 }
 
