@@ -39,7 +39,9 @@ header{position:fixed;top:0;left:0;right:0;height:58px;z-index:40;background:var
 .hbtn.on{background:var(--yellow);color:var(--navy)}
 
 /* ---------- 지도 ---------- */
-#map{position:fixed;inset:58px 0 0 0}
+/* !important 필수: 구글맵이 초기화 시 인라인 position:relative를 주입해
+   fixed 프레임을 풀어버림 → 높이 0 붕괴(흰 화면). 스타일시트 !important가 인라인을 이김 */
+#map{position:fixed !important;inset:58px 0 0 0}
 @media(min-width:861px){#map{left:392px}}
 
 /* ---------- 핀 ---------- */
